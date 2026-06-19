@@ -1,14 +1,15 @@
+import { useState } from "react";
 import { cn } from "@/lib/utils";
 import { ChevronDown, ChevronRight } from "lucide-react";
 
 interface SubNavSection {
   label: string;
-  expanded?: boolean;
+  expanded: boolean;
   active?: boolean;
   items?: { label: string; active?: boolean }[];
 }
 
-const sections: SubNavSection[] = [
+const initialSections: SubNavSection[] = [
   {
     label: "商品管理",
     expanded: true,
@@ -35,15 +36,24 @@ const sections: SubNavSection[] = [
 ];
 
 export default function SubSidebar() {
+  const [sections, setSections] = useState<SubNavSection[]>(initialSections);
+
+  const toggleSection = (index: number) => {
+    setSections((prev) =>
+      prev.map((section, i) => (i === index ? { ...section, expanded: !section.expanded } : section))
+    );
+  };
+
   return (
-    <aside className="w-[160px] min-h-screen bg-[#f7f8fa] border-r border-gray-200 flex flex-col shrink-0">
+    <aside className="w-[160px] h-screen bg-[#f7f8fa] border-r border-gray-200 flex flex-col shrink-0 overflow-y-auto">
       <nav className="flex-1 py-2 space-y-0.5">
-        {sections.map((section) => (
+        {sections.map((section, index) => (
           <div key={section.label}>
-            <a
-              href="#"
+            <button
+              type="button"
+              onClick={() => toggleSection(index)}
               className={cn(
-                "flex items-center justify-between px-4 py-2 text-sm transition-colors rounded-md mx-2",
+                "w-full flex items-center justify-between px-4 py-2 mx-2 text-sm rounded-md transition-colors",
                 section.active
                   ? "text-emerald-600 font-medium"
                   : "text-gray-600 hover:text-gray-900 hover:bg-white"
@@ -55,7 +65,7 @@ export default function SubSidebar() {
               ) : (
                 <ChevronRight className="w-4 h-4" />
               )}
-            </a>
+            </button>
 
             {section.expanded && section.items && (
               <div className="mt-0.5 space-y-0.5">
