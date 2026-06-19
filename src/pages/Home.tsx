@@ -107,11 +107,11 @@ export default function Home() {
   };
 
   return (
-    <div className="flex min-h-screen bg-[#f5f6f8]">
+    <div className="flex h-screen overflow-hidden bg-[#f5f6f8]">
       <MainSidebar />
       <SubSidebar />
 
-      <main className="flex-1 min-w-[1024px] flex flex-col">
+      <main className="flex-1 min-w-[1024px] flex flex-col h-screen overflow-hidden">
         <div className="flex-1 p-4 pb-24 overflow-auto">
           <div className="space-y-4">
             <FilterBar value={filters} onChange={setFilters} />
@@ -121,7 +121,7 @@ export default function Home() {
           </div>
         </div>
 
-        <div className="fixed bottom-0 left-[360px] right-0 h-16 bg-white border-t border-gray-200 px-6 flex items-center justify-end z-10">
+        <div className="h-16 bg-white border-t border-gray-200 px-6 flex items-center justify-end z-10 shrink-0">
           <button
             type="button"
             onClick={handleSave}
