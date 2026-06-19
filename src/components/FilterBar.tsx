@@ -1,4 +1,4 @@
-import { X, Calendar, ChevronDown } from "lucide-react";
+import { X, ChevronDown } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 export interface FilterState {
@@ -15,11 +15,11 @@ interface FilterBarProps {
 }
 
 const inputBase =
-  "h-10 w-full px-3 text-sm bg-gray-50 border border-gray-200 rounded-lg outline-none transition-all placeholder:text-gray-400 focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/15";
+  "h-9 w-full px-3 text-sm bg-[#f7f8fa] border border-gray-200 rounded-md outline-none transition-all placeholder:text-gray-400 focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/10";
 
 function RequiredLabel({ children }: { children: React.ReactNode }) {
   return (
-    <label className="text-xs font-medium text-gray-600 flex items-center">
+    <label className="text-xs text-gray-600 flex items-center mb-1.5">
       <span className="text-red-500 mr-1">*</span>
       {children}
     </label>
@@ -32,9 +32,9 @@ export default function FilterBar({ value, onChange }: FilterBarProps) {
   };
 
   return (
-    <div className="bg-white rounded-xl border border-gray-200 p-5 shadow-sm">
+    <div className="bg-white rounded-lg border border-gray-200 p-5">
       <div className="grid grid-cols-5 gap-4">
-        <div className="space-y-1.5">
+        <div>
           <RequiredLabel>店铺</RequiredLabel>
           <div className="relative">
             <select
@@ -50,8 +50,8 @@ export default function FilterBar({ value, onChange }: FilterBarProps) {
           </div>
         </div>
 
-        <div className="space-y-1.5">
-          <label className="text-xs font-medium text-gray-600">站点</label>
+        <div>
+          <label className="text-xs text-gray-600 flex items-center mb-1.5">站点</label>
           <div className="relative">
             <select
               value={value.site}
@@ -77,7 +77,7 @@ export default function FilterBar({ value, onChange }: FilterBarProps) {
           </div>
         </div>
 
-        <div className="space-y-1.5">
+        <div>
           <RequiredLabel>skc筛选</RequiredLabel>
           <input
             type="text"
@@ -88,32 +88,25 @@ export default function FilterBar({ value, onChange }: FilterBarProps) {
           />
         </div>
 
-        <div className="space-y-1.5">
+        <div>
           <RequiredLabel>开始时间</RequiredLabel>
-          <div className="relative">
-            <input
-              type="date"
-              value={value.startTime}
-              onChange={(e) => update("startTime", e.target.value)}
-              placeholder="选择开始时间"
-              className={cn(inputBase, "pr-8")}
-            />
-            <Calendar className="absolute right-2.5 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400 pointer-events-none" />
-          </div>
+          <input
+            type="date"
+            value={value.startTime}
+            onChange={(e) => update("startTime", e.target.value)}
+            className={cn(inputBase, "pr-2")}
+          />
         </div>
 
-        <div className="space-y-1.5">
+        <div>
           <RequiredLabel>结束时间</RequiredLabel>
-          <div className="relative">
-            <input
-              type="date"
-              value={value.endTime}
-              onChange={(e) => update("endTime", e.target.value)}
-              placeholder="选择结束时间"
-              className={cn(inputBase, "pr-8")}
-            />
-            <Calendar className="absolute right-2.5 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400 pointer-events-none" />
-          </div>
+          <input
+            type="date"
+            value={value.endTime}
+            onChange={(e) => update("endTime", e.target.value)}
+            placeholder="选择结束时间"
+            className={cn(inputBase, "pr-2")}
+          />
         </div>
       </div>
     </div>

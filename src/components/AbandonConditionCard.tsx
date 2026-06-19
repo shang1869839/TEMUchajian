@@ -14,7 +14,7 @@ const strategies: { key: AbandonStrategy; label: string }[] = [
 
 function RequiredLabel({ children }: { children: React.ReactNode }) {
   return (
-    <label className="text-xs font-medium text-gray-600 flex items-center">
+    <label className="text-xs text-gray-600 flex items-center mb-2">
       <span className="text-red-500 mr-1">*</span>
       {children}
     </label>
@@ -23,41 +23,32 @@ function RequiredLabel({ children }: { children: React.ReactNode }) {
 
 export default function AbandonConditionCard({ value, onChange }: AbandonConditionCardProps) {
   return (
-    <div className="bg-white rounded-xl border border-gray-200 p-6 shadow-sm">
-      <div className="flex items-center mb-5">
-        <h3 className="text-base font-bold text-gray-900">3、放弃核价条件</h3>
-      </div>
+    <div className="bg-white rounded-lg border border-gray-200 p-5">
+      <h3 className="text-[15px] font-bold text-gray-900 mb-4">3、放弃核价条件</h3>
 
-      <div className="space-y-3">
-        <RequiredLabel>不符合以上条件下，是否放弃核价</RequiredLabel>
-        <div className="flex items-center space-x-8">
-          {strategies.map((s) => (
-            <label
-              key={s.key}
-              className="inline-flex items-center cursor-pointer group"
+      <RequiredLabel>不符合以上条件下，是否放弃核价</RequiredLabel>
+      <div className="flex items-center space-x-8">
+        {strategies.map((s) => (
+          <label key={s.key} className="inline-flex items-center cursor-pointer group">
+            <span
+              className={cn(
+                "w-4 h-4 rounded-full border flex items-center justify-center mr-2 transition-colors",
+                value === s.key ? "border-emerald-500" : "border-gray-300 group-hover:border-gray-400"
+              )}
             >
-              <span
-                className={cn(
-                  "w-4 h-4 rounded-full border flex items-center justify-center mr-2 transition-colors",
-                  value === s.key
-                    ? "border-emerald-500"
-                    : "border-gray-300 group-hover:border-gray-400"
-                )}
-              >
-                {value === s.key && <span className="w-2 h-2 rounded-full bg-emerald-500" />}
-              </span>
-              <input
-                type="radio"
-                name="abandonStrategy"
-                value={s.key}
-                checked={value === s.key}
-                onChange={() => onChange(s.key)}
-                className="sr-only"
-              />
-              <span className="text-sm text-gray-700">{s.label}</span>
-            </label>
-          ))}
-        </div>
+              {value === s.key && <span className="w-2 h-2 rounded-full bg-emerald-500" />}
+            </span>
+            <input
+              type="radio"
+              name="abandonStrategy"
+              value={s.key}
+              checked={value === s.key}
+              onChange={() => onChange(s.key)}
+              className="sr-only"
+            />
+            <span className="text-sm text-gray-700">{s.label}</span>
+          </label>
+        ))}
       </div>
     </div>
   );

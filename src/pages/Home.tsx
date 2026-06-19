@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Play, Loader2, CheckCircle2, AlertCircle } from "lucide-react";
+import { Loader2, CheckCircle2, AlertCircle } from "lucide-react";
 import MainSidebar from "@/components/MainSidebar";
 import SubSidebar from "@/components/SubSidebar";
 import FilterBar, { type FilterState } from "@/components/FilterBar";
@@ -12,13 +12,13 @@ const initialFilters: FilterState = {
   store: "634418228717904",
   site: "US",
   skcFilter: "",
-  startTime: "",
+  startTime: "2026-05-31",
   endTime: "",
 };
 
 const initialAgree: AgreeConditionItem[] = [
-  { skuContains: "DX", officialPrice: "35", maxReportPrice: "40" },
-  { skuContains: "DXDZ", officialPrice: "25", maxReportPrice: "35" },
+  { skuContains: "DX", officialPrice: "≥ 35", maxReportPrice: "40" },
+  { skuContains: "DXDZ", officialPrice: "≥ 25", maxReportPrice: "35" },
 ];
 
 const initialRequote: RequoteCondition = {
@@ -112,8 +112,8 @@ export default function Home() {
       <SubSidebar />
 
       <main className="flex-1 min-w-[1024px] flex flex-col">
-        <div className="flex-1 p-5 pb-24 overflow-auto">
-          <div className="max-w-6xl mx-auto space-y-4">
+        <div className="flex-1 p-4 pb-24 overflow-auto">
+          <div className="space-y-4">
             <FilterBar value={filters} onChange={setFilters} />
             <AgreeConditionCard value={agree} onChange={setAgree} />
             <RequoteConditionCard value={requote} onChange={setRequote} />
@@ -126,9 +126,9 @@ export default function Home() {
             type="button"
             onClick={handleSave}
             disabled={loading}
-            className="inline-flex items-center px-6 py-2.5 text-sm font-medium text-white bg-emerald-500 rounded-lg hover:bg-emerald-600 transition-colors shadow-sm shadow-emerald-500/20 disabled:opacity-60"
+            className="inline-flex items-center px-5 py-2 text-sm font-medium text-white bg-emerald-500 rounded-md hover:bg-emerald-600 transition-colors disabled:opacity-60"
           >
-            {loading ? <Loader2 className="w-4 h-4 mr-2 animate-spin" /> : <Play className="w-4 h-4 mr-2" />}
+            {loading && <Loader2 className="w-4 h-4 mr-2 animate-spin" />}
             开始自动核价
           </button>
         </div>

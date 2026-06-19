@@ -18,20 +18,16 @@ const subNavItems = [
 
 export default function SubSidebar() {
   return (
-    <aside className="w-[160px] min-h-screen bg-gray-50 border-r border-gray-200 flex flex-col shrink-0">
-      <div className="h-16 flex items-center px-4 border-b border-gray-100">
-        <span className="text-sm font-semibold text-gray-700">商品管理</span>
-      </div>
-
+    <aside className="w-[160px] min-h-screen bg-[#f7f8fa] border-r border-gray-200 flex flex-col shrink-0">
       <nav className="flex-1 py-2 space-y-0.5">
         {subNavItems.map((item) => (
           <a
             key={item.label}
             href="#"
             className={cn(
-              "block px-4 py-2 text-sm transition-colors",
+              "block px-4 py-2 text-sm transition-colors rounded-md mx-2",
               item.active
-                ? "text-emerald-600 font-medium bg-white border-r-2 border-emerald-500"
+                ? "text-gray-900 font-medium bg-[#eeeeee]"
                 : "text-gray-600 hover:text-gray-900 hover:bg-white"
             )}
           >

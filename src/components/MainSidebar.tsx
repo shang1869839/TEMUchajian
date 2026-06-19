@@ -23,7 +23,7 @@ interface NavItem {
 }
 
 const mainNavItems: NavItem[] = [
-  { label: "商品管理", icon: ShoppingBag, active: false, expanded: true, hasSub: true },
+  { label: "商品管理", icon: ShoppingBag, active: true, expanded: true, hasSub: true },
   { label: "TEMU", icon: Globe, active: false },
   { label: "上品中心", icon: Boxes, active: false },
   { label: "店铺授权", icon: Store, active: false },
@@ -40,7 +40,7 @@ const mainNavItems: NavItem[] = [
 export default function MainSidebar() {
   return (
     <aside className="w-[200px] min-h-screen bg-white border-r border-gray-200 flex flex-col shrink-0">
-      <div className="h-16 flex items-center px-4 border-b border-gray-100">
+      <div className="h-[60px] flex items-center px-4 border-b border-gray-100">
         <div className="w-9 h-9 rounded-lg bg-emerald-500 flex items-center justify-center mr-2.5 shrink-0">
           <span className="text-white font-bold text-sm">m</span>
         </div>
@@ -56,9 +56,9 @@ export default function MainSidebar() {
             key={item.label}
             href="#"
             className={cn(
-              "flex items-center justify-between px-4 py-2.5 text-sm transition-colors",
+              "flex items-center justify-between px-4 py-2.5 text-sm transition-colors rounded-md mx-2",
               item.active
-                ? "text-emerald-600 bg-emerald-50/60 font-medium"
+                ? "text-emerald-600 bg-emerald-50 font-medium"
                 : "text-gray-600 hover:text-gray-900 hover:bg-gray-50"
             )}
           >
