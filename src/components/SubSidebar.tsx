@@ -45,7 +45,7 @@ export default function SubSidebar() {
   };
 
   return (
-    <aside className="w-[160px] h-screen bg-[#f7f8fa] border-r border-gray-200 flex flex-col shrink-0 overflow-y-auto">
+    <aside className="w-[160px] h-screen bg-[#f7f8fa] border-r border-gray-200 flex flex-col shrink-0 overflow-y-auto overflow-x-hidden">
       <nav className="flex-1 py-2 space-y-0.5">
         {sections.map((section, index) => (
           <div key={section.label}>
