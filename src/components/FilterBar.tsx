@@ -1,4 +1,5 @@
-import { Building2, Globe, Search, Calendar } from "lucide-react";
+import { X, Calendar, ChevronDown } from "lucide-react";
+import { cn } from "@/lib/utils";
 
 export interface FilterState {
   store: string;
@@ -14,7 +15,16 @@ interface FilterBarProps {
 }
 
 const inputBase =
-  "h-10 px-3 text-sm bg-gray-50 border border-gray-200 rounded-lg outline-none transition-all placeholder:text-gray-400 focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/15";
+  "h-10 w-full px-3 text-sm bg-gray-50 border border-gray-200 rounded-lg outline-none transition-all placeholder:text-gray-400 focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/15";
+
+function RequiredLabel({ children }: { children: React.ReactNode }) {
+  return (
+    <label className="text-xs font-medium text-gray-600 flex items-center">
+      <span className="text-red-500 mr-1">*</span>
+      {children}
+    </label>
+  );
+}
 
 export default function FilterBar({ value, onChange }: FilterBarProps) {
   const update = (key: keyof FilterState, val: string) => {
@@ -22,78 +32,88 @@ export default function FilterBar({ value, onChange }: FilterBarProps) {
   };
 
   return (
-    <div className="bg-white rounded-xl border border-gray-200 p-5 shadow-sm animate-[fadeIn_0.5s_ease-out]">
+    <div className="bg-white rounded-xl border border-gray-200 p-5 shadow-sm">
       <div className="grid grid-cols-5 gap-4">
         <div className="space-y-1.5">
-          <label className="text-xs font-medium text-gray-500 flex items-center">
-            <Building2 className="w-3.5 h-3.5 mr-1.5" />
-            店铺
-          </label>
-          <input
-            type="text"
-            value={value.store}
-            onChange={(e) => update("store", e.target.value)}
-            placeholder="请输入店铺 ID"
-            className={inputBase + " w-full"}
-          />
+          <RequiredLabel>店铺</RequiredLabel>
+          <div className="relative">
+            <select
+              value={value.store}
+              onChange={(e) => update("store", e.target.value)}
+              className={cn(inputBase, "appearance-none pr-8")}
+            >
+              <option value="">请选择店铺</option>
+              <option value="634418228717904">634418228717904</option>
+              <option value="1234567890">1234567890</option>
+            </select>
+            <ChevronDown className="absolute right-2.5 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400 pointer-events-none" />
+          </div>
         </div>
 
         <div className="space-y-1.5">
-          <label className="text-xs font-medium text-gray-500 flex items-center">
-            <Globe className="w-3.5 h-3.5 mr-1.5" />
-            站点
-          </label>
-          <select
-            value={value.site}
-            onChange={(e) => update("site", e.target.value)}
-            className={inputBase + " w-full"}
-          >
-            <option value="">全部站点</option>
-            <option value="US">美国站</option>
-            <option value="EU">欧洲站</option>
-            <option value="JP">日本站</option>
-            <option value="MX">墨西哥站</option>
-          </select>
+          <label className="text-xs font-medium text-gray-600">站点</label>
+          <div className="relative">
+            <select
+              value={value.site}
+              onChange={(e) => update("site", e.target.value)}
+              className={cn(inputBase, "appearance-none pr-16")}
+            >
+              <option value="">请选择站点</option>
+              <option value="US">美国站</option>
+              <option value="EU">欧洲站</option>
+              <option value="JP">日本站</option>
+              <option value="MX">墨西哥站</option>
+            </select>
+            <ChevronDown className="absolute right-8 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400 pointer-events-none" />
+            {value.site && (
+              <button
+                type="button"
+                onClick={() => update("site", "")}
+                className="absolute right-2.5 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600"
+              >
+                <X className="w-3.5 h-3.5" />
+              </button>
+            )}
+          </div>
         </div>
 
         <div className="space-y-1.5">
-          <label className="text-xs font-medium text-gray-500 flex items-center">
-            <Search className="w-3.5 h-3.5 mr-1.5" />
-            SKC 筛选
-          </label>
+          <RequiredLabel>skc筛选</RequiredLabel>
           <input
             type="text"
             value={value.skcFilter}
             onChange={(e) => update("skcFilter", e.target.value)}
-            placeholder="多个 SKC 用逗号分隔"
-            className={inputBase + " w-full"}
+            placeholder="多个用英文逗号、空格隔开"
+            className={inputBase}
           />
         </div>
 
         <div className="space-y-1.5">
-          <label className="text-xs font-medium text-gray-500 flex items-center">
-            <Calendar className="w-3.5 h-3.5 mr-1.5" />
-            开始时间
-          </label>
-          <input
-            type="datetime-local"
-            value={value.startTime}
-            onChange={(e) => update("startTime", e.target.value)}
-            className={inputBase + " w-full"}
-          />
+          <RequiredLabel>开始时间</RequiredLabel>
+          <div className="relative">
+            <input
+              type="date"
+              value={value.startTime}
+              onChange={(e) => update("startTime", e.target.value)}
+              placeholder="选择开始时间"
+              className={cn(inputBase, "pr-8")}
+            />
+            <Calendar className="absolute right-2.5 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400 pointer-events-none" />
+          </div>
         </div>
 
         <div className="space-y-1.5">
-          <label className="text-xs font-medium text-gray-500 flex items-center">
-            <Calendar className="w-3.5 h-3.5 mr-1.5" />
-            结束时间
-          </label>
-          <input
-            type="datetime-local"
-            value={value.endTime}
-            onChange={(e) => update("endTime", e.target.value)}
-            className={inputBase + " w-full"}
-          />
+          <RequiredLabel>结束时间</RequiredLabel>
+          <div className="relative">
+            <input
+              type="date"
+              value={value.endTime}
+              onChange={(e) => update("endTime", e.target.value)}
+              placeholder="选择结束时间"
+              className={cn(inputBase, "pr-8")}
+            />
+            <Calendar className="absolute right-2.5 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400 pointer-events-none" />
+          </div>
         </div>
       </div>
     </div>

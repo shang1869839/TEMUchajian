@@ -4,17 +4,19 @@ export interface CloudBaseResponse<T = unknown> {
   data?: T;
 }
 
+export interface AgreeConditionItem {
+  skuContains: string;
+  officialPrice: string;
+  maxReportPrice: string;
+}
+
 export interface PriceReviewConfig {
   store: string;
   site: string;
   skcFilter: string;
   startTime: string;
   endTime: string;
-  agreeJson: {
-    skuContains: string;
-    officialPrice: string;
-    maxReportPrice: string;
-  };
+  agreeJson: AgreeConditionItem[];
   requoteJson: {
     maxCheckCount: string;
     discountPercent: string;
