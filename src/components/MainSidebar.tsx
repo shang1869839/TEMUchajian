@@ -31,7 +31,7 @@ const mainNavItems: NavItem[] = [
 
 export default function MainSidebar() {
   return (
-    <aside className="w-[200px] h-screen bg-white border-r border-gray-200 flex flex-col shrink-0 overflow-y-auto overflow-x-hidden">
+    <aside className="w-[200px] h-full bg-white border-r border-gray-200 flex flex-col shrink-0 overflow-y-auto overflow-x-hidden">
       <div className="h-[60px] flex items-center px-4 border-b border-gray-100 shrink-0">
         <div className="w-9 h-9 rounded-lg bg-emerald-500 flex items-center justify-center mr-2.5 shrink-0">
           <span className="text-white font-bold text-sm">m</span>
